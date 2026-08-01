@@ -1,6 +1,5 @@
-import { type Experience } from '@/config/Experience';
 import React from 'react';
-
+import { type Experience } from '@/config/Experience';
 import { ExperienceCard } from './ExperienceCard';
 
 interface ExperienceListProps {
@@ -10,16 +9,16 @@ interface ExperienceListProps {
 export function ExperienceList({ experiences }: ExperienceListProps) {
   if (experiences.length === 0) {
     return (
-      <div className="py-8 text-center">
-        <p className="text-muted-foreground">No work experiences found.</p>
+      <div className="py-12 text-center">
+        <p className="text-neutral-500">No work experiences found.</p>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      {experiences.map((experience: Experience) => (
-        <ExperienceCard key={experience.company} experience={experience} />
+    <div className="relative flex flex-col gap-8 border-l border-neutral-800 ml-4 pl-6 sm:ml-6 sm:pl-8">
+      {experiences.map((experience: Experience, index: number) => (
+        <ExperienceCard key={experience.company || index} experience={experience} />
       ))}
     </div>
   );

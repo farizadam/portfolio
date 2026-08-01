@@ -1,21 +1,22 @@
+import React from 'react';
+import Image from 'next/image';
+import { Badge } from '@/components/ui/badge';
+
+// Technology icons
 import Bun from '@/components/technologies/Bun';
 import JavaScript from '@/components/technologies/JavaScript';
 import MongoDB from '@/components/technologies/MongoDB';
-// Import technology components
 import NextJs from '@/components/technologies/NextJs';
 import NodeJs from '@/components/technologies/NodeJs';
 import PostgreSQL from '@/components/technologies/PostgreSQL';
 import Prisma from '@/components/technologies/Prisma';
 import ReactIcon from '@/components/technologies/ReactIcon';
 import TypeScript from '@/components/technologies/TypeScript';
-import { Badge } from '@/components/ui/badge';
-import Image from 'next/image';
-import React from 'react';
 
 import { CodeCopyButton } from '../blog/CodeCopyButton';
 
 // Technology mapping for dynamic components
-const TechnologyComponents: Record<string, React.ComponentType> = {
+const TechnologyComponents: Record<string, React.ComponentType<React.SVGProps<SVGSVGElement>>> = {
   'Next.js': NextJs,
   nextjs: NextJs,
   React: ReactIcon,
@@ -43,8 +44,8 @@ const Technology = ({ name }: { name: string }) => {
     TechnologyComponents[name] || TechnologyComponents[name.toLowerCase()];
 
   return (
-    <div className="bg-muted/50 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium">
-      {TechComponent && <TechComponent />}
+    <div className="inline-flex items-center gap-2 rounded-lg border border-neutral-800 bg-neutral-900/80 px-3 py-1.5 text-xs font-medium text-neutral-300">
+      {TechComponent && <TechComponent className="size-4 shrink-0" />}
       <span>{name}</span>
     </div>
   );
@@ -53,8 +54,10 @@ const Technology = ({ name }: { name: string }) => {
 // Custom TechStack component for displaying multiple technologies
 const TechStack = ({ technologies }: { technologies: string[] }) => {
   return (
-    <div className="bg-muted/20 my-6 rounded-lg border p-4">
-      <h4 className="mb-3 text-lg font-semibold">Technology Stack</h4>
+    <div className="my-8 rounded-2xl border border-neutral-800/80 bg-neutral-900/40 p-5">
+      <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-neutral-500">
+        Technology Stack
+      </h4>
       <div className="flex flex-wrap gap-2">
         {technologies.map((tech) => (
           <Technology key={tech} name={tech} />
@@ -77,43 +80,50 @@ const ProjectMeta = ({
   status?: string;
 }) => {
   return (
-    <div className="bg-muted/20 my-6 grid gap-4 rounded-lg border p-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="my-8 grid gap-4 rounded-2xl border border-neutral-800/80 bg-neutral-900/40 p-5 sm:grid-cols-2 lg:grid-cols-4">
       {timeline && (
         <div>
-          <h5 className="text-muted-foreground text-sm font-semibold">
+          <h5 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
             Timeline
           </h5>
-          <p className="text-sm">{timeline}</p>
+          <p className="mt-1 text-sm font-medium text-neutral-200">{timeline}</p>
         </div>
       )}
       {role && (
         <div>
-          <h5 className="text-muted-foreground text-sm font-semibold">Role</h5>
-          <p className="text-sm">{role}</p>
+          <h5 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+            Role
+          </h5>
+          <p className="mt-1 text-sm font-medium text-neutral-200">{role}</p>
         </div>
       )}
       {team && (
         <div>
-          <h5 className="text-muted-foreground text-sm font-semibold">Team</h5>
-          <p className="text-sm">{team}</p>
+          <h5 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+            Team
+          </h5>
+          <p className="mt-1 text-sm font-medium text-neutral-200">{team}</p>
         </div>
       )}
       {status && (
         <div>
-          <h5 className="text-muted-foreground text-sm font-semibold">
+          <h5 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
             Status
           </h5>
-          <Badge
-            variant={
-              status === 'completed'
-                ? 'default'
-                : status === 'in-progress'
-                  ? 'secondary'
-                  : 'outline'
-            }
-          >
-            {status.charAt(0).toUpperCase() + status.slice(1)}
-          </Badge>
+          <div className="mt-1">
+            <Badge
+              variant="outline"
+              className={`capitalize text-xs font-medium border-0 ${
+                status === 'completed'
+                  ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30'
+                  : status === 'in-progress'
+                  ? 'bg-amber-500/10 text-amber-400 border border-amber-500/30'
+                  : 'bg-neutral-800 text-neutral-300'
+              }`}
+            >
+              {status}
+            </Badge>
+          </div>
         </div>
       )}
     </div>
@@ -123,18 +133,19 @@ const ProjectMeta = ({
 // Custom Challenges component
 const Challenges = ({ challenges }: { challenges: string[] }) => {
   return (
-    <div className="my-6 rounded-lg border border-yellow-200 bg-yellow-50 p-4 dark:border-yellow-800 dark:bg-yellow-950/20">
-      <h4 className="mb-3 text-lg font-semibold text-yellow-800 dark:text-yellow-200">
+    <div className="my-8 rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5">
+      <h4 className="mb-3 text-base font-semibold text-amber-300 flex items-center gap-2">
+        <span className="size-2 rounded-full bg-amber-400" />
         Key Challenges
       </h4>
       <ul className="space-y-2">
         {challenges.map((challenge, index) => (
           <li
             key={index}
-            className="flex items-start gap-2 text-sm text-yellow-700 dark:text-yellow-300"
+            className="flex items-start gap-2 text-sm text-amber-200/80"
           >
-            <span className="mt-1 block size-1.5 rounded-full bg-yellow-500 dark:bg-yellow-400" />
-            {challenge}
+            <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-amber-400/60" />
+            <span>{challenge}</span>
           </li>
         ))}
       </ul>
@@ -145,18 +156,19 @@ const Challenges = ({ challenges }: { challenges: string[] }) => {
 // Custom Learnings component
 const Learnings = ({ learnings }: { learnings: string[] }) => {
   return (
-    <div className="my-6 rounded-lg border border-green-200 bg-green-50 p-4 dark:border-green-800 dark:bg-green-950/20">
-      <h4 className="mb-3 text-lg font-semibold text-green-800 dark:text-green-200">
+    <div className="my-8 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-5">
+      <h4 className="mb-3 text-base font-semibold text-emerald-300 flex items-center gap-2">
+        <span className="size-2 rounded-full bg-emerald-400" />
         Key Learnings
       </h4>
       <ul className="space-y-2">
         {learnings.map((learning, index) => (
           <li
             key={index}
-            className="flex items-start gap-2 text-sm text-green-700 dark:text-green-300"
+            className="flex items-start gap-2 text-sm text-emerald-200/80"
           >
-            <span className="mt-1 block size-1.5 rounded-full bg-green-500 dark:bg-green-400" />
-            {learning}
+            <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-emerald-400/60" />
+            <span>{learning}</span>
           </li>
         ))}
       </ul>
@@ -165,7 +177,7 @@ const Learnings = ({ learnings }: { learnings: string[] }) => {
 };
 
 export const ProjectComponents = {
-  // Inherit blog components for basic markdown
+  // MDX Overrides
   img: ({
     src,
     alt,
@@ -180,7 +192,7 @@ export const ProjectComponents = {
       alt={alt}
       width={800}
       height={400}
-      className="rounded-lg"
+      className="my-6 rounded-2xl border border-neutral-800 bg-neutral-900 object-cover"
       {...props}
     />
   ),
@@ -191,7 +203,7 @@ export const ProjectComponents = {
     children: React.ReactNode;
     [key: string]: unknown;
   }) => (
-    <h1 className="mb-6 text-4xl font-bold" {...props}>
+    <h1 className="mt-10 mb-6 text-3xl font-bold tracking-tight text-white sm:text-4xl" {...props}>
       {children}
     </h1>
   ),
@@ -202,7 +214,7 @@ export const ProjectComponents = {
     children: React.ReactNode;
     [key: string]: unknown;
   }) => (
-    <h2 className="mt-8 mb-4 text-3xl font-semibold" {...props}>
+    <h2 className="mt-8 mb-4 text-2xl font-semibold tracking-tight text-white" {...props}>
       {children}
     </h2>
   ),
@@ -213,7 +225,7 @@ export const ProjectComponents = {
     children: React.ReactNode;
     [key: string]: unknown;
   }) => (
-    <h3 className="mt-6 mb-3 text-2xl font-medium" {...props}>
+    <h3 className="mt-6 mb-3 text-xl font-medium tracking-tight text-neutral-200" {...props}>
       {children}
     </h3>
   ),
@@ -224,7 +236,7 @@ export const ProjectComponents = {
     children: React.ReactNode;
     [key: string]: unknown;
   }) => (
-    <p className="text-muted-foreground mb-4 leading-7" {...props}>
+    <p className="mb-4 text-base leading-relaxed text-neutral-400" {...props}>
       {children}
     </p>
   ),
@@ -235,7 +247,7 @@ export const ProjectComponents = {
     children: React.ReactNode;
     [key: string]: unknown;
   }) => (
-    <ul className="mb-4 ml-6 list-disc space-y-2" {...props}>
+    <ul className="mb-6 ml-6 list-disc space-y-2 text-neutral-400" {...props}>
       {children}
     </ul>
   ),
@@ -246,7 +258,7 @@ export const ProjectComponents = {
     children: React.ReactNode;
     [key: string]: unknown;
   }) => (
-    <ol className="mb-4 ml-6 list-decimal space-y-2" {...props}>
+    <ol className="mb-6 ml-6 list-decimal space-y-2 text-neutral-400" {...props}>
       {children}
     </ol>
   ),
@@ -257,7 +269,7 @@ export const ProjectComponents = {
     children: React.ReactNode;
     [key: string]: unknown;
   }) => (
-    <li className="text-muted-foreground leading-7" {...props}>
+    <li className="text-base leading-relaxed text-neutral-400" {...props}>
       {children}
     </li>
   ),
@@ -269,12 +281,8 @@ export const ProjectComponents = {
     [key: string]: unknown;
   }) => {
     const getTextContent = (node: React.ReactNode): string => {
-      if (typeof node === 'string') {
-        return node;
-      }
-      if (typeof node === 'number') {
-        return String(node);
-      }
+      if (typeof node === 'string') return node;
+      if (typeof node === 'number') return String(node);
       if (
         React.isValidElement(node) &&
         node.props &&
@@ -293,9 +301,9 @@ export const ProjectComponents = {
     const codeText = getTextContent(children);
 
     return (
-      <div className="group relative mb-4">
+      <div className="group relative my-6">
         <pre
-          className="bg-muted/30 overflow-x-auto rounded-lg border p-4 text-sm [&>code]:bg-transparent [&>code]:p-0"
+          className="overflow-x-auto rounded-2xl border border-neutral-800 bg-neutral-950 p-4 font-mono text-sm leading-relaxed text-neutral-300 [&>code]:bg-transparent [&>code]:p-0"
           {...props}
         >
           {children}
@@ -322,7 +330,7 @@ export const ProjectComponents = {
     }
 
     return (
-      <code className="rounded px-2 py-1 font-mono text-sm" {...props}>
+      <code className="rounded-md border border-neutral-800 bg-neutral-900/80 px-1.5 py-0.5 font-mono text-sm text-neutral-200" {...props}>
         {children}
       </code>
     );
@@ -335,14 +343,14 @@ export const ProjectComponents = {
     [key: string]: unknown;
   }) => (
     <blockquote
-      className="border-primary text-muted-foreground mb-4 border-l-4 pl-4 italic"
+      className="my-6 border-l-2 border-emerald-500 pl-4 italic text-neutral-400"
       {...props}
     >
       {children}
     </blockquote>
   ),
 
-  // Project-specific components
+  // Project-specific custom components
   Technology,
   TechStack,
   ProjectMeta,

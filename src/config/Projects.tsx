@@ -10,7 +10,7 @@ export const projects: Project[] = [
     title: 'CovoitAir',
     description:
       'Cross-platform airport ride-sharing application connecting travelers with drivers. Features secure authentication, role-based dashboards, Stripe payment integration, ride management, booking history, and real-time trip administration.',
-    image: '/project/notesbuddy.png',
+    image: '/project/covoitair.png',
     link: 'https://github.com/adamfariz/airport',
     technologies: [
       { name: 'React Native', icon: <ReactIcon key="react" /> },
@@ -28,7 +28,7 @@ export const projects: Project[] = [
     title: 'AI Live Fact-Checking Extension',
     description:
       'AI-powered Chrome extension that captures live audio, transcribes speech using Groq Whisper, extracts factual claims, and prepares structured JSON for automated verification using Llama 3.3.',
-    image: '/project/appwrite.png',
+    image: '/project/factcheck.png',
     link: 'https://github.com/adamfariz/fact_check',
     technologies: [
       { name: 'JavaScript', icon: <ReactIcon key="javascript" /> },
@@ -45,7 +45,7 @@ export const projects: Project[] = [
     title: 'Learnify',
     description:
       'Full-stack e-learning platform featuring course management, interactive quizzes, student progress tracking, authentication, REST APIs, and a modern responsive interface built for scalable online learning.',
-    image: '/project/syncify.png',
+    image: '/project/learnify.png',
     link: 'https://github.com/adamfariz/learnify',
     technologies: [
       { name: 'React', icon: <ReactIcon key="react" /> },
@@ -63,7 +63,7 @@ export const projects: Project[] = [
     title: 'AI E-Commerce Platform',
     description:
       'Full-stack e-commerce website built with PHP and MySQL featuring product management, shopping cart, authentication, order processing, and AI-powered image search that allows users to find products by uploading an image.',
-    image: '/project/that-startup.png',
+    image: '/project/ecommerce.png',
     link: 'https://github.com/adamfariz/EcomWebsite',
     technologies: [
       { name: 'PHP', icon: <NodeJs key="php" /> },

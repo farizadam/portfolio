@@ -38,33 +38,39 @@ export default function Hero() {
   };
 
   return (
-    <Container className="pt-12 pb-10 sm:pt-16 sm:pb-14">
-      {/* Header section matching reference structure */}
-      <div className="flex items-center gap-5 sm:gap-6">
-        <Image
-          src={avatar}
-          alt={`${name} profile photo`}
-          width={112}
-          height={112}
-          className="size-20 rounded-full bg-neutral-800 object-cover sm:size-28 shrink-0"
-          priority
-        />
+    <Container className="pt-16 pb-12 sm:pt-24 sm:pb-16">
+      {/* Header section */}
+      <div className="flex items-center gap-6 sm:gap-8">
+        {/* Avatar with animated gradient ring */}
+        <div className="group relative shrink-0">
+          <div className="absolute -inset-[3px] rounded-full bg-gradient-to-br from-amber-400 via-yellow-500 to-orange-500 opacity-80 blur-[1px] transition-opacity duration-500 group-hover:opacity-100" />
+          <div className="relative rounded-full bg-gradient-to-br from-amber-400 via-yellow-500 to-orange-500 p-[2.5px]">
+            <Image
+              src={avatar}
+              alt={`${name} profile photo`}
+              width={120}
+              height={120}
+              className="size-22 rounded-full bg-neutral-900 object-cover ring-2 ring-neutral-900 sm:size-28"
+              priority
+            />
+          </div>
+        </div>
 
         <div className="flex flex-col justify-center min-w-0">
-          <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+          <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
             {name}
           </h1>
 
-          <div className="mt-1 flex flex-wrap items-center gap-x-2 text-base text-neutral-400 sm:text-lg">
-            <span>{title}</span>
-            <span className="text-neutral-600">·</span>
+          <div className="mt-2 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-sm text-neutral-500 sm:text-[15px]">
+            <span className="font-medium text-neutral-400">{title}</span>
+            <span className="text-neutral-700">·</span>
             <span>Casablanca / Rabat</span>
-            <span className="text-neutral-600">·</span>
+            <span className="text-neutral-700">·</span>
 
             <div className="inline-flex items-center gap-1.5">
               <TrackedLink
                 href={`mailto:${email}`}
-                className="transition-colors hover:text-white"
+                className="text-neutral-400 transition-colors duration-200 hover:text-foreground"
                 track={{ name: 'email_click', data: { location: 'hero' } }}
               >
                 {email}
@@ -73,37 +79,44 @@ export default function Hero() {
                 onClick={handleCopyEmail}
                 type="button"
                 aria-label="Copy email address"
-                className="text-neutral-500 hover:text-white transition-colors p-0.5"
+                className="text-neutral-600 hover:text-foreground transition-all duration-200 p-0.5 hover:scale-110"
               >
-                {copied ? <CheckIcon className="size-4 text-emerald-500" /> : <CopyIcon className="size-4" />}
+                {copied ? <CheckIcon className="size-3.5 text-emerald-400" /> : <CopyIcon className="size-3.5" />}
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Your original Bio */}
-      <p className="mt-8 max-w-2xl text-base leading-7 text-secondary sm:mt-9 sm:text-xl">
+      {/* Bio */}
+      <p className="mt-9 max-w-2xl text-[15px] leading-relaxed text-neutral-400 sm:mt-11 sm:text-lg sm:leading-relaxed">
         Full Stack Developer building secure web and mobile applications, reliable APIs, and AI-powered tools.
       </p>
 
-      {/* Your original Status badge */}
-      <div className="mt-6 flex items-center gap-2 text-base text-secondary sm:text-lg">
-        <span className="flex size-6 items-center justify-center rounded-full bg-emerald-500 text-xs text-black">●</span>
+      {/* Status badge */}
+      <div className="mt-5 inline-flex items-center gap-2.5 rounded-full border border-emerald-500/10 bg-emerald-500/5 px-4 py-2 text-sm text-neutral-400">
+        <span className="relative flex size-2">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+          <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
+        </span>
         <span>Open to freelance and full-time opportunities</span>
       </div>
 
-      {/* Your original Social Links */}
-      <div className="mt-7 flex items-center gap-4">
+      {/* Thin separator */}
+      <div className="mt-8 border-t border-white/[0.04]" />
+
+      {/* Social Links */}
+      <div className="mt-6 flex items-center gap-1">
         {socialLinks.map((link) => (
           <TrackedLink
             key={link.name}
             href={link.href}
-            className="text-secondary transition-colors hover:text-foreground"
+            className="group/social flex items-center gap-2 rounded-lg px-3 py-2 text-neutral-600 transition-all duration-200 hover:bg-white/[0.03] hover:text-neutral-300"
             aria-label={link.name}
-            track={{ name: 'external_link_click', data: { url: link.href, location: 'hero_social' } }}
+            track={{ name: 'external_link_click', data: { url: link.href, text: link.name, location: 'hero_social' } }}
           >
-            <span className="block size-6">{link.icon}</span>
+            <span className="block size-[18px] transition-transform duration-200 group-hover/social:scale-110">{link.icon}</span>
+            <span className="text-xs font-medium opacity-0 transition-opacity duration-200 group-hover/social:opacity-100 hidden sm:inline">{link.name}</span>
           </TrackedLink>
         ))}
       </div>

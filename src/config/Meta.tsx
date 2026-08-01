@@ -19,8 +19,8 @@ export const siteConfig = {
   author: {
     name: about.name,
     twitter: '',
-    github: 'farizadam',
-    linkedin: 'adamfariz-3bba3b2a9',
+    github: 'adamfariz',
+    linkedin: 'adam-fariz-3bba3b2a9',
     email: 'adam.fariz@um5r.ac.ma',
   },
   keywords: [

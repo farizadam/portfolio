@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import JavaScript from '@/components/technologies/JavaScript';
 import MongoDB from '@/components/technologies/MongoDB';
 import NextJs from '@/components/technologies/NextJs';
@@ -6,14 +7,19 @@ import PostgreSQL from '@/components/technologies/PostgreSQL';
 import ReactIcon from '@/components/technologies/ReactIcon';
 import TailwindCss from '@/components/technologies/TailwindCss';
 
-export const mySkills = [
-  <JavaScript key="javascript" />,
-  <ReactIcon key="react" />,
-  <NextJs key="nextjs" />,
-  <NodeJs key="nodejs" />,
-  <MongoDB key="mongodb" />,
-  <PostgreSQL key="postgresql" />,
-  <TailwindCss key="tailwind" />,
+interface SkillItem {
+  name: string;
+  icon: ReactNode;
+}
+
+export const mySkills: SkillItem[] = [
+  { name: 'JavaScript', icon: <JavaScript /> },
+  { name: 'React', icon: <ReactIcon /> },
+  { name: 'Next.js', icon: <NextJs /> },
+  { name: 'Node.js', icon: <NodeJs /> },
+  { name: 'MongoDB', icon: <MongoDB /> },
+  { name: 'PostgreSQL', icon: <PostgreSQL /> },
+  { name: 'Tailwind CSS', icon: <TailwindCss /> },
 ];
 
 export const about = {

@@ -45,7 +45,7 @@ export const experiences: Experience[] = [
     company: 'ASSORS',
     position: 'Full Stack Developer Intern',
     location: 'Casablanca, Morocco',
-    image: '/assets/logo.png',
+    image: '/company/assors.png',
     description: [
       'Developing an enterprise business management platform that centralizes sales, purchasing, inventory, financial documents, and employee management.',
       'Building AI-powered recruitment tools including CV parsing, automated candidate ranking, and intelligent scoring to accelerate hiring decisions.',
@@ -63,7 +63,7 @@ export const experiences: Experience[] = [
     company: 'Big House Marketing',
     position: 'Freelance Full Stack Developer',
     location: 'Remote',
-    image: '/assets/logo.png',
+    image: '/company/bighouse.png',
     description: [
       'Designed and developed modern websites and high-converting landing pages for healthcare professionals and marketing agencies.',
       'Built responsive, SEO-friendly applications using React, Node.js, and Tailwind CSS with a strong focus on performance.',
@@ -80,7 +80,7 @@ export const experiences: Experience[] = [
     company: 'Team ElGhazi',
     position: 'Full Stack Developer Intern',
     location: 'Morocco',
-    image: '/company/expelee.png',
+    image: '/company/elghazi.png',
     description: [
       'Developed full-stack web applications and e-commerce solutions using Next.js, React, Express.js, and Tailwind CSS.',
       'Implemented authentication systems, product management features, and scalable backend APIs.',
@@ -97,7 +97,7 @@ export const experiences: Experience[] = [
     company: 'Innovation Center',
     position: 'Coding & Robotics Instructor',
     location: 'Morocco',
-    image: '/company/loop.png',
+    image: '/company/innovation.png',
     description: [
       'Taught Python programming fundamentals through interactive coding sessions and real-world programming exercises.',
       'Introduced students to Arduino programming, robotics, and embedded systems using practical laboratory projects.',

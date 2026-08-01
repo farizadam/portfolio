@@ -1,5 +1,4 @@
-import Container from '@/components/common/Container';
-import About from '@/components/landing/About';
+import Education from '@/components/landing/Education';
 import Experience from '@/components/landing/Experience';
 import Github from '@/components/landing/Github';
 import Hero from '@/components/landing/Hero';
@@ -8,12 +7,12 @@ import React from 'react';
 
 export default function page() {
   return (
-    <Container className="min-h-screen">
+    <main className="min-h-screen">
       <Hero />
       <Experience />
       <Work />
-      <About />
+      <Education />
       <Github />
-    </Container>
+    </main>
   );
 }

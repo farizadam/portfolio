@@ -33,11 +33,35 @@ export default function ResumePage() {
           </p>
         </div>
         <Separator />
-        <div className="mx-auto max-w-2xl">
-          <iframe
-            src={resumeConfig.url}
-            className="min-h-screen w-full"
-          ></iframe>
+        <div className="mx-auto flex max-w-2xl flex-col items-center gap-4">
+          <object
+            data={resumeConfig.url}
+            type="application/pdf"
+            className="min-h-screen w-full rounded-md border"
+          >
+            <div className="flex flex-col items-center justify-center p-8 text-center border rounded-md min-h-[300px]">
+              <p className="mb-4">It looks like your browser cannot display the PDF directly.</p>
+              <a
+                href={resumeConfig.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-md font-medium"
+              >
+                Download Resume
+              </a>
+            </div>
+          </object>
+          
+          <div className="mt-4">
+            <a
+              href={resumeConfig.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-muted-foreground hover:underline"
+            >
+              Open PDF in a new tab
+            </a>
+          </div>
         </div>
       </div>
     </Container>

@@ -153,7 +153,7 @@ export default function Github() {
             </div>
           </div>
         ) : hasError || contributions.length === 0 ? (
-          <div className="text-muted-foreground border-border rounded-xl border-2 border-dashed p-8 text-center">
+          <div className="text-neutral-500 rounded-xl border border-dashed border-white/5 p-8 text-center">
             <div className="bg-muted mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full">
               <GithubIcon className="h-8 w-8" />
             </div>
@@ -184,7 +184,7 @@ export default function Github() {
           </div>
         ) : (
           <div className="relative overflow-hidden">
-            <div className="bg-background/50 relative rounded-lg border border-dashed border-black/20 p-6 backdrop-blur-sm dark:border-white/10">
+            <div className="bg-neutral-950/30 relative rounded-lg border border-white/5 p-6">
               <div className="w-full overflow-x-auto">
                 <ActivityCalendar
                   data={contributions}

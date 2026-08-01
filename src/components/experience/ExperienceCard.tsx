@@ -1,8 +1,8 @@
+import React from 'react';
+import Image from 'next/image';
+import { Link } from 'next-view-transitions';
 import { type Experience } from '@/config/Experience';
 import { cn } from '@/lib/utils';
-import { Link } from 'next-view-transitions';
-import Image from 'next/image';
-import React from 'react';
 
 import Skill from '../common/Skill';
 import Github from '../svgs/Github';
@@ -15,139 +15,145 @@ interface ExperienceCardProps {
   experience: Experience;
 }
 
-const parseDescription = (text: string): string => {
-  return text.replace(/\*(.*?)\*/g, '<b>$1</b>');
-};
+// Safely formats *bold text* without dangerouslySetInnerHTML
+function FormattedDescription({ text }: { text: string }) {
+  const parts = text.split(/(\*.*?\*)/g);
+
+  return (
+    <span>
+      {parts.map((part, index) => {
+        if (part.startsWith('*') && part.endsWith('*')) {
+          return (
+            <strong key={index} className="font-semibold text-neutral-200">
+              {part.slice(1, -1)}
+            </strong>
+          );
+        }
+        return part;
+      })}
+    </span>
+  );
+}
 
 export function ExperienceCard({ experience }: ExperienceCardProps) {
+  const socialLinks = [
+    { href: experience.website, label: 'Visit Website', icon: <Website /> },
+    { href: experience.x, label: 'Follow on X', icon: <X /> },
+    { href: experience.linkedin, label: 'Connect on LinkedIn', icon: <LinkedIn /> },
+    { href: experience.github, label: 'View GitHub', icon: <Github /> },
+  ].filter((link) => Boolean(link.href));
+
   return (
-    <div className="flex flex-col gap-4">
-      {/* Company Header */}
-      <div className="flex flex-col gap-2 md:flex-row md:justify-between">
-        {/* Left Side */}
+    <div className="group relative flex flex-col gap-5 rounded-2xl border border-neutral-800/80 bg-neutral-900/40 p-5 transition-all duration-200 hover:border-neutral-700 hover:bg-neutral-900/80 sm:p-6">
+      {/* Timeline Bullet Node */}
+      <span 
+        aria-hidden="true" 
+        className="absolute -left-[31px] sm:-left-[39px] top-7 size-3.5 rounded-full border-2 border-neutral-950 bg-neutral-600 transition-colors group-hover:bg-emerald-400" 
+      />
+
+      {/* Card Header */}
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex items-center gap-4">
-          <Image
-            src={experience.image}
-            alt={experience.company}
-            width={100}
-            height={100}
-            className="size-12 rounded-md"
-          />
+          {experience.image && (
+            <Image
+              src={experience.image}
+              alt={`${experience.company} logo`}
+              width={48}
+              height={48}
+              className="size-12 rounded-xl bg-neutral-800 object-cover ring-1 ring-white/10 shrink-0"
+            />
+          )}
+
           <div className="flex flex-col">
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <h3
                 className={cn(
-                  'text-lg font-bold',
-                  experience.isBlur ? 'blur-[5px]' : 'blur-none',
+                  'text-lg font-bold text-white sm:text-xl',
+                  experience.isBlur ? 'blur-[5px]' : 'blur-none'
                 )}
               >
                 {experience.company}
               </h3>
-              {experience.website && (
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Link
-                      href={experience.website}
-                      target="_blank"
-                      className="size-4 text-neutral-500"
-                    >
-                      <Website />
-                    </Link>
-                  </TooltipTrigger>
-                  <TooltipContent>Visit Website</TooltipContent>
-                </Tooltip>
-              )}
-              {experience.x && (
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Link
-                      href={experience.x}
-                      target="_blank"
-                      className="size-4 text-neutral-500"
-                    >
-                      <X />
-                    </Link>
-                  </TooltipTrigger>
-                  <TooltipContent>Follow on X</TooltipContent>
-                </Tooltip>
-              )}
-              {experience.linkedin && (
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Link
-                      href={experience.linkedin}
-                      target="_blank"
-                      className="size-4 text-neutral-500"
-                    >
-                      <LinkedIn />
-                    </Link>
-                  </TooltipTrigger>
-                  <TooltipContent>Connect on LinkedIn</TooltipContent>
-                </Tooltip>
-              )}
-              {experience.github && (
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Link
-                      href={experience.github}
-                      target="_blank"
-                      className="size-4 text-neutral-500"
-                    >
-                      <Github />
-                    </Link>
-                  </TooltipTrigger>
-                  <TooltipContent>View GitHub</TooltipContent>
-                </Tooltip>
-              )}
+
+              {/* Social Links */}
+              <div className="flex items-center gap-1.5 ml-1">
+                {socialLinks.map((link) => (
+                  <Tooltip key={link.label}>
+                    <TooltipTrigger asChild>
+                      <Link
+                        href={link.href!}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-1 text-neutral-400 transition-colors hover:text-white"
+                      >
+                        <span className="block size-4">{link.icon}</span>
+                      </Link>
+                    </TooltipTrigger>
+                    <TooltipContent>{link.label}</TooltipContent>
+                  </Tooltip>
+                ))}
+              </div>
+
+              {/* Active Working Indicator */}
               {experience.isCurrent && (
-                <div className="flex items-center gap-1 rounded-md border-green-300 bg-green-500/10 px-2 py-1 text-xs">
-                  <div className="size-2 animate-pulse rounded-full bg-green-500"></div>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-xs font-medium text-emerald-400">
+                  <span className="relative flex size-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
+                  </span>
                   Working
-                </div>
+                </span>
               )}
             </div>
-            <p>{experience.position}</p>
+
+            <p className="mt-0.5 text-base font-medium text-neutral-300">
+              {experience.position}
+            </p>
           </div>
         </div>
-        {/* Right Side */}
-        <div className="text-secondary flex flex-col md:text-right">
-          <p>
-            {experience.startDate} -{' '}
-            {experience.isCurrent ? 'Present' : experience.endDate}
+
+        {/* Date & Location */}
+        <div className="text-xs text-neutral-400 sm:text-right sm:text-sm">
+          <p className="font-mono text-neutral-300">
+            {experience.startDate} – {experience.isCurrent ? 'Present' : experience.endDate}
           </p>
-          <p>{experience.location}</p>
+          <p className="mt-0.5 text-neutral-500">{experience.location}</p>
         </div>
       </div>
 
-      {/* Technologies */}
-      <div>
-        <h4 className="text-md mt-4 mb-2 font-semibold">Technologies</h4>
-        <div className="flex flex-wrap gap-2">
-          {experience.technologies.map((technology, techIndex: number) => (
-            <Skill
-              key={techIndex}
-              name={technology.name}
-              href={technology.href}
-            >
-              {technology.icon}
-            </Skill>
+      {/* Description List */}
+      {experience.description && experience.description.length > 0 && (
+        <ul className="space-y-2 text-sm leading-relaxed text-neutral-400 sm:text-base">
+          {experience.description.map((desc: string, descIndex: number) => (
+            <li key={descIndex} className="flex items-start gap-2">
+              <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-neutral-500" aria-hidden="true" />
+              <div>
+                <FormattedDescription text={desc} />
+              </div>
+            </li>
           ))}
-        </div>
-      </div>
+        </ul>
+      )}
 
-      {/* Description */}
-      <div className="text-secondary flex flex-col">
-        {experience.description.map(
-          (description: string, descIndex: number) => (
-            <p
-              key={descIndex}
-              dangerouslySetInnerHTML={{
-                __html: `• ${parseDescription(description)}`,
-              }}
-            />
-          ),
-        )}
-      </div>
+      {/* Tech Stack Skills */}
+      {experience.technologies && experience.technologies.length > 0 && (
+        <div className="pt-2 border-t border-neutral-800/60">
+          <h4 className="text-xs font-semibold uppercase tracking-wider text-neutral-500 mb-2">
+            Technologies
+          </h4>
+          <div className="flex flex-wrap gap-2">
+            {experience.technologies.map((technology, techIndex: number) => (
+              <Skill
+                key={techIndex}
+                name={technology.name}
+                href={technology.href}
+              >
+                {technology.icon}
+              </Skill>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

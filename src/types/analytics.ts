@@ -54,6 +54,9 @@ export type AnalyticsEventData = {
     message: string;
     sender: 'user' | 'assistant';
   };
+  email_click: {
+    location: string;
+  };
   external_link_click: {
     url: string;
     text: string;

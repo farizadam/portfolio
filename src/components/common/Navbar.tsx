@@ -7,13 +7,13 @@ import { TrackedLink } from './TrackedLink';
 
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-20 border-b border-white/5 bg-background/85 backdrop-blur">
-      <Container className="py-3">
+    <header className="sticky top-0 z-20 bg-background/80 backdrop-blur-sm">
+      <Container className="py-4">
         <div className="flex items-center justify-between">
-          <nav className="flex items-center gap-5 text-sm font-medium text-secondary sm:gap-8 sm:text-base">
+          <nav className="flex items-center gap-6 text-sm font-medium text-neutral-500 sm:gap-9">
             {navbarConfig.navItems.map((item) => (
               <TrackedLink
-                className="transition-colors hover:text-foreground"
+                className="transition-colors duration-200 hover:text-foreground"
                 key={item.label}
                 href={item.href}
                 track={{
@@ -25,7 +25,7 @@ export default function Navbar() {
               </TrackedLink>
             ))}
           </nav>
-          <ThemeToggleButton className="text-secondary hover:text-foreground" variant="circle" start="top-right" blur />
+          <ThemeToggleButton className="text-neutral-500 hover:text-foreground" variant="circle" start="top-right" blur />
         </div>
       </Container>
     </header>

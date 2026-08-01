@@ -37,7 +37,7 @@ export const heroConfig = {
 };
 
 export const socialLinks = [
-  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/adamfariz-3bba3b2a9', icon: <LinkedIn /> },
-  { name: 'GitHub', href: 'https://github.com/farizadam', icon: <Github /> },
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/adam-fariz-3bba3b2a9', icon: <LinkedIn /> },
+  { name: 'GitHub', href: 'https://github.com/adamfariz', icon: <Github /> },
   { name: 'Email', href: 'mailto:adam.fariz@um5r.ac.ma', icon: <Mail /> },
 ];
