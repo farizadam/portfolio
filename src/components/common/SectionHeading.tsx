@@ -10,7 +10,10 @@ export default function SectionHeading({
   heading,
 }: SectionHeadingProps) {
   return (
-    <div>
+    <div className="space-y-1">
+      <p className="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-500">
+        {subHeading}
+      </p>
       <h2 className="text-2xl font-bold tracking-tight">{heading}</h2>
     </div>
   );
