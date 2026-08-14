@@ -38,7 +38,7 @@ export default function Hero() {
   };
 
   return (
-    <Container className="pt-16 pb-12 sm:pt-24 sm:pb-16">
+    <Container className="pt-4 pb-12 sm:pt-8 sm:pb-16">
       {/* Header section */}
       <div className="flex items-center gap-6 sm:gap-8">
         {/* Avatar with animated gradient ring */}

@@ -1,122 +1,27 @@
 'use client';
 
 import { githubConfig } from '@/config/Github';
-import { useTheme } from 'next-themes';
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 
 import Container from '../common/Container';
 import GithubIcon from '../svgs/Github';
 import { Button } from '../ui/button';
 
-const ActivityCalendar = dynamic(
-  () => import('react-activity-calendar').then((mod) => mod.default),
-  { ssr: false },
-);
-
-type ContributionItem = {
-  date: string;
-  count: number;
-  level: 0 | 1 | 2 | 3 | 4;
-};
-
-type GitHubContributionResponse = {
-  date: string;
-  contributionCount: number;
-  contributionLevel:
-    | 'NONE'
-    | 'FIRST_QUARTILE'
-    | 'SECOND_QUARTILE'
-    | 'THIRD_QUARTILE'
-    | 'FOURTH_QUARTILE';
-};
-
-// Helper function to filter contributions to past year
-function filterLastYear(contributions: ContributionItem[]): ContributionItem[] {
-  const oneYearAgo = new Date();
-  oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-
-  return contributions.filter((item) => {
-    const itemDate = new Date(item.date);
-    return itemDate >= oneYearAgo;
-  });
-}
-
 export default function Github() {
-  const [contributions, setContributions] = useState<ContributionItem[]>([]);
-  const [totalContributions, setTotalContributions] = useState<number>(0);
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasError, setHasError] = useState(false);
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        setIsLoading(true);
-        const response = await fetch(
-          `${githubConfig.apiUrl}/${githubConfig.username}.json`,
-        );
-        const data: { contributions?: unknown[] } = await response.json();
-
-        if (data?.contributions && Array.isArray(data.contributions)) {
-          // Flatten the nested array structure
-          const flattenedContributions = data.contributions.flat();
-
-          // Convert contribution levels to numbers
-          const contributionLevelMap = {
-            NONE: 0,
-            FIRST_QUARTILE: 1,
-            SECOND_QUARTILE: 2,
-            THIRD_QUARTILE: 3,
-            FOURTH_QUARTILE: 4,
-          };
-
-          // Transform to the expected format
-          const validContributions = flattenedContributions
-            .filter(
-              (item: unknown): item is GitHubContributionResponse =>
-                typeof item === 'object' &&
-                item !== null &&
-                'date' in item &&
-                'contributionCount' in item &&
-                'contributionLevel' in item,
-            )
-            .map((item: GitHubContributionResponse) => ({
-              date: String(item.date),
-              count: Number(item.contributionCount || 0),
-              level: (contributionLevelMap[
-                item.contributionLevel as keyof typeof contributionLevelMap
-              ] || 0) as ContributionItem['level'],
-            }));
-
-          if (validContributions.length > 0) {
-            // Calculate total contributions
-            const total = validContributions.reduce(
-              (sum, item) => sum + item.count,
-              0,
-            );
-            setTotalContributions(total);
-
-            // Filter to show only the past year
-            const filteredContributions = filterLastYear(validContributions);
-            setContributions(filteredContributions);
-          } else {
-            setHasError(true);
-          }
-        } else {
-          setHasError(true);
-        }
-      } catch (err) {
-        console.error('Failed to fetch GitHub contributions:', err);
-        setHasError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    fetchData();
+    setMounted(true);
   }, []);
+
+  const isDark = !mounted || resolvedTheme === 'dark';
+
+  const graphUrl = isDark
+    ? "https://github-readme-activity-graph.vercel.app/graph?username=adamfariz&theme=tokyo-night&hide_border=true&bg_color=1a1b26&area=true&v=1"
+    : "https://github-readme-activity-graph.vercel.app/graph?username=adamfariz&theme=default&hide_border=true&bg_color=ffffff&area=true&v=1";
 
   return (
     <Container className="mt-20">
@@ -130,86 +35,45 @@ export default function Github() {
             <p className="text-muted-foreground text-sm">
               <b>{githubConfig.username}</b>&apos;s {githubConfig.subtitle}
             </p>
-            {!isLoading && !hasError && totalContributions > 0 && (
-              <p className="text-primary mt-1 text-sm font-medium">
-                Total:{' '}
-                <span className="font-black">
-                  {totalContributions.toLocaleString()}
-                </span>{' '}
-                contributions
-              </p>
-            )}
           </div>
+          <Button
+            variant="outline"
+            asChild
+            track={{
+              name: 'external_link_click',
+              data: {
+                url: `https://github.com/${githubConfig.username}`,
+                text: 'View Profile',
+                location: 'github_section',
+              },
+            }}
+          >
+            <Link
+              href={`https://github.com/${githubConfig.username}`}
+              className="inline-flex items-center gap-2"
+            >
+              <GithubIcon className="h-4 w-4" />
+              View Profile
+            </Link>
+          </Button>
         </div>
 
         {/* Content */}
-        {isLoading ? (
-          <div className="flex items-center justify-center py-16">
-            <div className="text-center">
-              <div className="border-primary mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-2 border-t-transparent"></div>
-              <p className="text-muted-foreground text-sm">
-                {githubConfig.loadingState.description}
-              </p>
-            </div>
+        <div className="relative overflow-hidden">
+          <div className="bg-neutral-100 dark:bg-neutral-950/30 relative rounded-lg border border-neutral-200 dark:border-white/5 p-6 flex justify-center items-center min-h-[200px]">
+            {mounted ? (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                alt="GitHub Activity Graph"
+                src={graphUrl}
+                width="100%"
+                className="max-w-full h-auto rounded-md"
+              />
+            ) : (
+              <div className="h-[200px] w-full animate-pulse bg-neutral-200 dark:bg-neutral-800 rounded-md"></div>
+            )}
           </div>
-        ) : hasError || contributions.length === 0 ? (
-          <div className="text-neutral-500 rounded-xl border border-dashed border-white/5 p-8 text-center">
-            <div className="bg-muted mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full">
-              <GithubIcon className="h-8 w-8" />
-            </div>
-            <p className="mb-2 font-medium">{githubConfig.errorState.title}</p>
-            <p className="mb-4 text-sm">
-              {githubConfig.errorState.description}
-            </p>
-            <Button
-              variant="outline"
-              asChild
-              track={{
-                name: 'external_link_click',
-                data: {
-                  url: `https://github.com/${githubConfig.username}`,
-                  text: githubConfig.errorState.buttonText,
-                  location: 'github_section',
-                },
-              }}
-            >
-              <Link
-                href={`https://github.com/${githubConfig.username}`}
-                className="inline-flex items-center gap-2"
-              >
-                <GithubIcon className="h-4 w-4" />
-                {githubConfig.errorState.buttonText}
-              </Link>
-            </Button>
-          </div>
-        ) : (
-          <div className="relative overflow-hidden">
-            <div className="bg-neutral-950/30 relative rounded-lg border border-white/5 p-6">
-              <div className="w-full overflow-x-auto">
-                <ActivityCalendar
-                  data={contributions}
-                  blockSize={12}
-                  blockMargin={4}
-                  fontSize={githubConfig.fontSize}
-                  colorScheme={theme === 'dark' ? 'dark' : 'light'}
-                  maxLevel={githubConfig.maxLevel}
-                  hideTotalCount={true}
-                  hideColorLegend={false}
-                  hideMonthLabels={false}
-                  theme={githubConfig.theme}
-                  labels={{
-                    months: githubConfig.months,
-                    weekdays: githubConfig.weekdays,
-                    totalCount: githubConfig.totalCountLabel,
-                  }}
-                  style={{
-                    color: 'rgb(139, 148, 158)',
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-        )}
+        </div>
       </div>
     </Container>
   );
