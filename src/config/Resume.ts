@@ -1,3 +1,3 @@
 export const resumeConfig = {
-  url: '/FarizAdamEn.pdf',
+  url: '/farizadam.pdf',
 };
