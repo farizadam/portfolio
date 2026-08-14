@@ -20,6 +20,10 @@ export const navbarConfig = {
       href: '/work-experience',
     },
     {
+      label: 'Projects',
+      href: '/projects',
+    },
+    {
       label: 'Education',
       href: '/#education',
     },
