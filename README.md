@@ -2,7 +2,6 @@
 
 A modern, responsive portfolio template built with Next.js 15, TypeScript, Tailwind CSS, and Shadcn UI. It includes a blog system, project showcase, experience timeline, and a contact form with Telegram integration.
 
-![Portfolio Preview](/public/meta/hero.png)
 
 ## Quick demo / Deploy
 
