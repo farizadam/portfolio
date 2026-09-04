@@ -1,3 +1,4 @@
+import ClarityAnalytics from '@/components/analytics/ClarityAnalytics';
 import UmamiAnalytics from '@/components/analytics/UmamiAnalytics';
 import Footer from '@/components/common/Footer';
 import Navbar from '@/components/common/Navbar';
@@ -30,6 +31,7 @@ export default function RootLayout({
               {children}
               <Footer />
               <UmamiAnalytics />
+              <ClarityAnalytics />
             </ReactLenis>
           </ThemeProvider>
         </body>
