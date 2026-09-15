@@ -11,7 +11,7 @@ export default function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <div className="space-y-1">
-      <p className="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-500">
+      <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
         {subHeading}
       </p>
       <h2 className="text-2xl font-bold tracking-tight">{heading}</h2>

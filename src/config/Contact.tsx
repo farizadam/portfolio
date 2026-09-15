@@ -1,7 +1,7 @@
 export const contactConfig = {
   title: 'Contact',
   description:
-    'Get in touch at adam.fariz@um5r.ac.ma. I will get back to you as soon as possible.',
+    'Tell me about your project, a role you are hiring for, or a problem you want a second opinion on. I usually reply within a day.',
   form: {
     labels: {
       name: 'Name',

@@ -1,10 +1,11 @@
 import { about } from './About';
 import { experiences } from './Experience';
-import { heroConfig, socialLinks } from './Hero';
+import { socialLinks } from './Hero';
+import { skillGroups } from './Skills';
 import { projects } from './Projects';
 
 function generateSystemPrompt(): string {
-  const skillNames = heroConfig.skills.map((skill) => skill.name).join(', ');
+  const skillNames = skillGroups.flatMap((group) => group.items.map((item) => item.name)).join(', ');
   const socialLinksText = socialLinks
     .map((link) => `${link.name}: ${link.href}`)
     .join('\n- ');

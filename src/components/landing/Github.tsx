@@ -24,7 +24,7 @@ export default function Github() {
     : "https://github-readme-activity-graph.vercel.app/graph?username=adamfariz&theme=default&hide_border=true&bg_color=ffffff&area=true&v=1";
 
   return (
-    <Container className="mt-20">
+    <Container id="github" className="py-10 sm:py-14">
       <div className="space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -60,7 +60,7 @@ export default function Github() {
 
         {/* Content */}
         <div className="relative overflow-hidden">
-          <div className="bg-neutral-100 dark:bg-neutral-950/30 relative rounded-lg border border-neutral-200 dark:border-white/5 p-6 flex justify-center items-center min-h-[200px]">
+          <div className="relative flex min-h-[200px] items-center justify-center rounded-xl border border-border bg-card/50 p-6">
             {mounted ? (
               /* eslint-disable-next-line @next/next/no-img-element */
               <img
@@ -70,7 +70,7 @@ export default function Github() {
                 className="max-w-full h-auto rounded-md"
               />
             ) : (
-              <div className="h-[200px] w-full animate-pulse bg-neutral-200 dark:bg-neutral-800 rounded-md"></div>
+              <div className="h-[200px] w-full animate-pulse rounded-md bg-muted"></div>
             )}
           </div>
         </div>

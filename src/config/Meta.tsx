@@ -1,216 +1,166 @@
-import { about } from './About';
+import type { Metadata } from 'next';
+
 import { heroConfig } from './Hero';
 
 export interface PageMeta {
   title: string;
   description: string;
-  keywords?: string[];
   ogImage?: string;
   twitterCard?: 'summary' | 'summary_large_image';
+  /** Set to false for pages that should stay out of search results */
+  index?: boolean;
 }
 
 // Base site configuration
 export const siteConfig = {
   name: heroConfig.name,
-  title: 'Adam Fariz | Full Stack Developer',
-  description: 'Portfolio of Adam Fariz, a Full Stack Developer building secure web, mobile, and AI-powered applications.',
-  url: process.env.NEXT_PUBLIC_URL || 'https://farizadam.netlify.app',
+  title: `${heroConfig.name} | Full Stack Developer in Morocco`,
+  description:
+    'Adam Fariz is a full stack developer based in Casablanca and Rabat, Morocco, building secure web and mobile apps, REST APIs, and AI-powered tools with Next.js, React Native, Node.js, and PostgreSQL.',
+  url: (process.env.NEXT_PUBLIC_URL || 'https://farizadam.vercel.app').replace(/\/$/, ''),
   ogImage: '/meta/opengraph-image.png',
+  locale: 'en_US',
   author: {
-    name: about.name,
+    name: heroConfig.name,
     twitter: '',
     github: 'adamfariz',
     linkedin: 'adam-fariz-3bba3b2a9',
-    email: 'adam.fariz@um5r.ac.ma',
+    email: heroConfig.email,
   },
-  keywords: [
-    'portfolio',
-    'developer',
-    'full-stack',
-    'react',
-    'nextjs',
-    'typescript',
-    'web development',
-    heroConfig.name.toLowerCase(),
-  ],
+  location: {
+    cities: ['Casablanca', 'Rabat'],
+    region: 'Casablanca-Settat',
+    country: 'Morocco',
+    countryCode: 'MA',
+  },
 };
 
 export const pageMetadata: Record<string, PageMeta> = {
-  // Home page
   '/': {
-    title: `${heroConfig.name} - ${heroConfig.title}`,
-    description: `${about.description} Explore my projects, experience, and technical expertise.`,
-    keywords: [
-      'portfolio',
-      'developer',
-      'full-stack',
-      'web development',
-      'projects',
-    ],
+    title: `${heroConfig.name} | Full Stack Developer in Casablanca, Morocco`,
+    description:
+      'Full stack developer in Casablanca and Rabat, Morocco. I build secure web and mobile apps with Next.js, React Native, Node.js, and PostgreSQL, plus AI-powered tools. Open to freelance and full-time roles.',
     ogImage: '/meta/hero.png',
     twitterCard: 'summary_large_image',
   },
 
-  // Contact page
-  '/contact': {
-    title: 'Contact - Get in Touch',
-    description:
-      "Get in touch with me for collaborations, projects, or opportunities. I'd love to hear from you!",
-    keywords: ['contact', 'hire', 'collaboration', 'freelance', 'developer'],
-    ogImage: '/assets/logo.png',
-    twitterCard: 'summary',
-  },
-
-  // Work Experience page
-  '/work-experience': {
-    title: 'Work Experience - Professional Journey',
-    description:
-      'Explore my professional work experience across different companies and roles in software development.',
-    keywords: [
-      'work experience',
-      'career',
-      'professional',
-      'software developer',
-      'employment history',
-    ],
-    ogImage: '/meta/work.png',
-    twitterCard: 'summary_large_image',
-  },
-
-  // Projects page
   '/projects': {
-    title: 'Projects - My Work & Projects Portfolio',
+    title: 'Full Stack Projects | Next.js, React Native, Node.js',
     description:
-      'Discover my projects and work across different technologies and domains. From web apps to mobile solutions.',
-    keywords: [
-      'projects',
-      'portfolio',
-      'web development',
-      'applications',
-      'software',
-    ],
+      'Web apps, mobile apps, APIs, and AI tooling built by Adam Fariz, a full stack developer in Morocco. Enterprise ERP, airport carpooling with Stripe Connect, an LMS, and more.',
     ogImage: '/meta/projects.png',
     twitterCard: 'summary_large_image',
   },
 
-  // Blog page
-  '/blog': {
-    title: 'Blog - Thoughts & Tutorials',
+  '/work-experience': {
+    title: 'Work Experience | Full Stack Developer in Morocco',
     description:
-      'Read my thoughts, tutorials, and insights on engineering, programming, and web development.',
-    keywords: [
-      'blog',
-      'tutorials',
-      'programming',
-      'web development',
-      'technical writing',
-    ],
-    ogImage: '/meta/blogs.png',
+      'Internships, freelance work, and teaching roles across Casablanca and Rabat. What Adam Fariz built at each company and the stack behind it.',
+    ogImage: '/meta/work.png',
     twitterCard: 'summary_large_image',
   },
 
-  // Resume page
   '/resume': {
-    title: 'Resume - Professional CV',
-    description: `View and download ${heroConfig.name}'s professional resume and CV. Technical skills, experience, and qualifications.`,
-    keywords: [
-      'resume',
-      'cv',
-      'professional',
-      'skills',
-      'qualifications',
-      'download',
-    ],
+    title: 'Resume | Adam Fariz, Full Stack Developer',
+    description:
+      'Download or read the resume of Adam Fariz, a full stack developer in Casablanca, Morocco. Skills, experience, and education on one page.',
     ogImage: '/meta/resume.png',
     twitterCard: 'summary',
   },
 
-  // Gears page
-  '/gears': {
-    title: 'Gears - My Setup & Tools',
+  '/contact': {
+    title: 'Contact | Hire a Full Stack Developer in Morocco',
     description:
-      'Discover the tools, devices, and software I use to get my work done efficiently.',
-    keywords: [
-      'setup',
-      'tools',
-      'devices',
-      'software',
-      'productivity',
-      'development environment',
-    ],
-    ogImage: '/meta/gears.png',
+      'Get in touch with Adam Fariz for freelance projects, full-time roles, or technical advice. Based in Casablanca and Rabat, Morocco. Replies within a day.',
+    ogImage: '/meta/contact.png',
     twitterCard: 'summary_large_image',
   },
 
-  // Setup page
-  '/setup': {
-    title: 'Setup Guide - VS Code Configuration',
+  '/blog': {
+    title: 'Articles | Notes on Building Full Stack Products',
     description:
-      'Complete guide to setting up VS Code with my preferred configuration, extensions, and fonts for optimal development.',
-    keywords: [
-      'vscode',
-      'setup',
-      'configuration',
-      'extensions',
-      'development environment',
-      'guide',
-    ],
-    ogImage: '/meta/setup.png',
+      'Articles by Adam Fariz on architecture decisions, performance work, and lessons from shipping web and mobile products from Morocco.',
+    ogImage: '/meta/blogs.png',
     twitterCard: 'summary_large_image',
+  },
+
+  // Template pages kept out of the index until they hold real content
+  '/gears': {
+    title: 'Gear and Setup',
+    description: 'Devices and tools used day to day.',
+    ogImage: '/meta/gears.png',
+    index: false,
+  },
+  '/setup': {
+    title: 'Editor Setup',
+    description: 'VS Code configuration and extensions.',
+    ogImage: '/meta/setup.png',
+    index: false,
+  },
+  '/journey': {
+    title: 'Journey',
+    description: 'Milestones and certificates.',
+    index: false,
+  },
+  '/journey/certificates': {
+    title: 'Certificates',
+    description: 'Certificates and achievements.',
+    index: false,
   },
 };
 
-// Helper function to get metadata for a specific page
 export function getPageMetadata(pathname: string): PageMeta {
   return pageMetadata[pathname] || pageMetadata['/'];
 }
 
-// Helper function to generate complete metadata object for Next.js
-export function generateMetadata(pathname: string) {
+/** Builds the full Next.js metadata object for a route. */
+export function generateMetadata(pathname: string): Metadata {
   const pageMeta = getPageMetadata(pathname);
+  const url = `${siteConfig.url}${pathname === '/' ? '' : pathname}`;
+  const index = pageMeta.index ?? true;
+  const image = pageMeta.ogImage || siteConfig.ogImage;
 
   return {
     metadataBase: new URL(siteConfig.url),
     title: pageMeta.title,
     description: pageMeta.description,
-    keywords: pageMeta.keywords?.join(', '),
-    authors: [{ name: siteConfig.author.name }],
+    authors: [{ name: siteConfig.author.name, url: siteConfig.url }],
     creator: siteConfig.author.name,
+    publisher: siteConfig.author.name,
+    applicationName: siteConfig.name,
+    category: 'technology',
     openGraph: {
       type: 'website',
-      url: `${siteConfig.url}${pathname}`,
+      locale: siteConfig.locale,
+      url,
       title: pageMeta.title,
       description: pageMeta.description,
       siteName: siteConfig.title,
-      images: [
-        {
-          url: pageMeta.ogImage || siteConfig.ogImage,
-          width: 1200,
-          height: 630,
-          alt: pageMeta.title,
-        },
-      ],
+      images: [{ url: image, width: 1200, height: 630, alt: pageMeta.title }],
     },
     twitter: {
       card: pageMeta.twitterCard || 'summary_large_image',
       title: pageMeta.title,
       description: pageMeta.description,
-      creator: siteConfig.author.twitter,
-      images: [pageMeta.ogImage || siteConfig.ogImage],
+      images: [image],
     },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
-    alternates: {
-      canonical: `${siteConfig.url}${pathname}`,
+    robots: index
+      ? {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            'max-video-preview': -1,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+          },
+        }
+      : { index: false, follow: false },
+    alternates: { canonical: url },
+    other: {
+      'geo.region': `${siteConfig.location.countryCode}-06`,
+      'geo.placename': siteConfig.location.cities.join(', '),
     },
   };
 }

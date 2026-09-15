@@ -1,8 +1,13 @@
 import Container from '@/components/common/Container';
-import { Separator } from '@/components/ui/separator';
+import PageHeader from '@/components/common/PageHeader';
+import { TrackedLink } from '@/components/common/TrackedLink';
+import ArrowUpRight from '@/components/svgs/ArrowUpRight';
+import CV from '@/components/svgs/CV';
+import { Button } from '@/components/ui/button';
 import { generateMetadata as getMetadata } from '@/config/Meta';
 import { resumeConfig } from '@/config/Resume';
 import { Metadata } from 'next';
+import { Link } from 'next-view-transitions';
 import React from 'react';
 
 export const metadata: Metadata = {
@@ -22,48 +27,60 @@ export const metadata: Metadata = {
 
 export default function ResumePage() {
   return (
-    <Container className="py-16">
-      <div className="space-y-8">
-        <div className="space-y-4 text-center">
-          <h1 className="text-4xl font-bold tracking-tight lg:text-5xl">
-            Resume
-          </h1>
-          <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
-            My resume.
-          </p>
-        </div>
-        <Separator />
-        <div className="mx-auto flex max-w-2xl flex-col items-center gap-4">
-          <object
-            data={resumeConfig.url}
-            type="application/pdf"
-            className="min-h-screen w-full rounded-md border"
-          >
-            <div className="flex flex-col items-center justify-center p-8 text-center border rounded-md min-h-[300px]">
-              <p className="mb-4">It looks like your browser cannot display the PDF directly.</p>
-              <a
-                href={resumeConfig.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-md font-medium"
-              >
-                Download Resume
+    <Container className="py-10 sm:py-14">
+      <PageHeader
+        eyebrow="CV"
+        title="Resume"
+        description="A one-page summary of my experience, skills, and education. Download it or read it inline."
+      >
+        <Button asChild>
+          <a href={resumeConfig.url} download>
+            <CV className="size-4" />
+            Download PDF
+          </a>
+        </Button>
+        <Button asChild variant="outline">
+          <a href={resumeConfig.url} target="_blank" rel="noopener noreferrer">
+            Open in new tab
+            <ArrowUpRight className="size-4" />
+          </a>
+        </Button>
+      </PageHeader>
+
+      <div className="mt-8 overflow-hidden rounded-2xl border border-border bg-card/50">
+        <object
+          data={`${resumeConfig.url}#toolbar=0&navpanes=0`}
+          type="application/pdf"
+          className="h-[80vh] min-h-[600px] w-full"
+        >
+          <div className="flex min-h-[300px] flex-col items-center justify-center p-8 text-center">
+            <p className="mb-4 text-muted-foreground">
+              Your browser cannot display the PDF inline.
+            </p>
+            <Button asChild>
+              <a href={resumeConfig.url} target="_blank" rel="noopener noreferrer">
+                Open the resume
               </a>
-            </div>
-          </object>
-          
-          <div className="mt-4">
-            <a
-              href={resumeConfig.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-muted-foreground hover:underline"
-            >
-              Open PDF in a new tab
-            </a>
+            </Button>
           </div>
-        </div>
+        </object>
       </div>
+
+      <p className="mt-6 text-sm text-muted-foreground">
+        Prefer a conversation?{' '}
+        <TrackedLink
+          href="/contact"
+          className="font-medium text-foreground underline-offset-4 hover:underline"
+          track={{ name: 'button_click', data: { buttonId: 'resume_contact', section: 'resume' } }}
+        >
+          Get in touch
+        </TrackedLink>{' '}
+        or browse the{' '}
+        <Link href="/work-experience" className="font-medium text-foreground underline-offset-4 hover:underline">
+          full work history
+        </Link>
+        .
+      </p>
     </Container>
   );
 }

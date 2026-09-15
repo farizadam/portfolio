@@ -15,6 +15,8 @@ import { Project } from '@/types/project';
 export const projects: Project[] = [
   {
     title: 'Resume AI',
+    category: 'AI',
+    highlight: 'LLM-driven resume generation and mock interviews',
     description: 'AI-Powered Resume & Mock Interviewer Platform. Engineered an open-source, full-stack web application to automate dynamic resume generation and conduct interactive technical mock interviews.',
     image: '/project/resumeai.jpg',
     link: 'https://github.com/adamfariz/resume-ai',
@@ -32,6 +34,8 @@ export const projects: Project[] = [
   },
   {
     title: 'Enterprise ERP Platform',
+    category: 'Web App',
+    highlight: 'Three-way reconciliation engine for procurement',
     description: 'Modern Business Management System with deterministic, multi-stage pipelines for procurement and sales, and an automated three-way reconciliation engine.',
     image: '/project/erp.jpg',
     link: '#',
@@ -49,6 +53,8 @@ export const projects: Project[] = [
   },
   {
     title: 'Custom E-Commerce Platform',
+    category: 'Web App',
+    highlight: 'Hand-built MVC framework in native PHP',
     description: 'Lightweight MVC framework built in native PHP to decouple routing, database models, and presentation views, featuring a comprehensive back-office dashboard.',
     image: '/project/ecommerce.png',
     link: 'https://github.com/adamfariz/EcomWebsite',
@@ -64,6 +70,8 @@ export const projects: Project[] = [
   },
   {
     title: 'Airport Carpooling Platform',
+    category: 'Mobile',
+    highlight: 'Stripe Connect Express multi-party payouts',
     description: 'Mobile carpooling application engineered for airport ride matching, featuring a multi-party payment pipeline integrating Stripe Connect Express for automated driver payouts.',
     image: '/project/covoitair.png',
     link: 'https://github.com/adamfariz/airport',
@@ -81,6 +89,8 @@ export const projects: Project[] = [
   },
   {
     title: 'Learnify',
+    category: 'Web App',
+    highlight: 'Dockerized LMS with role-based access control',
     description: 'Containerized Learning Management System with dedicated student and instructor portals, dynamic quiz generation, and robust role-based access control.',
     image: '/project/learnify.png',
     link: 'https://github.com/adamfariz/learnify',
@@ -99,6 +109,8 @@ export const projects: Project[] = [
   },
   {
     title: 'Fact Check',
+    category: 'Browser Extension',
+    highlight: 'Real-time DOM claim verification',
     description: 'Real-Time Browser Extension capturing DOM text for claim verification, backed by an asynchronous Express REST API evaluating claims against external datasets.',
     image: '/project/factcheck.png',
     link: 'https://github.com/adamfariz/fact_check',

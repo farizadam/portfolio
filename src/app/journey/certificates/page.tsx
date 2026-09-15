@@ -8,10 +8,7 @@ import { Metadata } from 'next';
 import path from 'path';
 import React from 'react';
 
-export const metadata: Metadata = {
-  ...getMetadata('/journey/certificates'),
-  robots: { index: true, follow: true },
-};
+export const metadata: Metadata = getMetadata('/journey/certificates');
 
 export default function CertificatesPage() {
   // Server-side: auto-discover certificate images placed under public/certificates
