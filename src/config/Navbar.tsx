@@ -24,12 +24,12 @@ export const navbarConfig = {
       href: '/projects',
     },
     {
-      label: 'Education',
-      href: '/#education',
-    },
-    {
       label: 'Resume',
       href: '/resume',
+    },
+    {
+      label: 'Contact',
+      href: '/contact',
     },
   ] as NavItem[],
 };

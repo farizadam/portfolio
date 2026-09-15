@@ -8,20 +8,7 @@ import { Download, ExternalLink, FileText } from 'lucide-react';
 import { Metadata } from 'next';
 import React from 'react';
 
-export const metadata: Metadata = {
-  ...getMetadata('/setup'),
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-};
+export const metadata: Metadata = getMetadata('/setup');
 
 export default function SetupPage() {
   return (

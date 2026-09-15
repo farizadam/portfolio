@@ -7,10 +7,7 @@ import { Metadata } from 'next';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import React from 'react';
 
-export const metadata: Metadata = {
-  ...getMetadata('/journey'),
-  robots: { index: true, follow: true },
-};
+export const metadata: Metadata = getMetadata('/journey');
 
 export default function JourneyPage() {
   const data = getJourneyContent();

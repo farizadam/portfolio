@@ -2,7 +2,9 @@ import ExpressJs from '@/components/technologies/ExpressJs';
 import JavaScript from '@/components/technologies/JavaScript';
 import NextJs from '@/components/technologies/NextJs';
 import NodeJs from '@/components/technologies/NodeJs';
+import MySQL from '@/components/technologies/MySQL';
 import PostgreSQL from '@/components/technologies/PostgreSQL';
+import Python from '@/components/technologies/Python';
 import ReactIcon from '@/components/technologies/ReactIcon';
 import TailwindCss from '@/components/technologies/TailwindCss';
 
@@ -36,8 +38,8 @@ const express = { name: 'Express.js', href: 'https://expressjs.com/', icon: <Exp
 const tailwind = { name: 'Tailwind CSS', href: 'https://tailwindcss.com/', icon: <TailwindCss /> };
 const javascript = { name: 'JavaScript', href: 'https://developer.mozilla.org/docs/Web/JavaScript', icon: <JavaScript /> };
 const postgresql = { name: 'PostgreSQL', href: 'https://www.postgresql.org/', icon: <PostgreSQL /> };
-const mysql = { name: 'MySQL', href: 'https://www.mysql.com/', icon: <PostgreSQL /> };
-const python = { name: 'Python', href: 'https://www.python.org/', icon: <JavaScript /> };
+const mysql = { name: 'MySQL', href: 'https://www.mysql.com/', icon: <MySQL /> };
+const python = { name: 'Python', href: 'https://www.python.org/', icon: <Python /> };
 
 export const experiences: Experience[] = [
   {
