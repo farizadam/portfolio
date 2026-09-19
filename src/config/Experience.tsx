@@ -7,6 +7,8 @@ import PostgreSQL from '@/components/technologies/PostgreSQL';
 import Python from '@/components/technologies/Python';
 import ReactIcon from '@/components/technologies/ReactIcon';
 import TailwindCss from '@/components/technologies/TailwindCss';
+import TypeScript from '@/components/technologies/TypeScript';
+import Motion from '@/components/technologies/Motion';
 
 export interface Technology {
   name: string;
@@ -40,24 +42,27 @@ const javascript = { name: 'JavaScript', href: 'https://developer.mozilla.org/do
 const postgresql = { name: 'PostgreSQL', href: 'https://www.postgresql.org/', icon: <PostgreSQL /> };
 const mysql = { name: 'MySQL', href: 'https://www.mysql.com/', icon: <MySQL /> };
 const python = { name: 'Python', href: 'https://www.python.org/', icon: <Python /> };
+const typescript = { name: 'TypeScript', href: 'https://www.typescriptlang.org/', icon: <TypeScript /> };
+const motion = { name: 'Framer Motion', href: 'https://www.framer.com/motion/', icon: <Motion /> };
+
 
 export const experiences: Experience[] = [
   {
-    isCurrent: true,
+    isCurrent: false,
     company: 'ASSORS',
     position: 'Full Stack Developer Intern',
     location: 'Casablanca, Morocco',
     image: '/company/assors.png',
     description: [
-      'Developing an enterprise business management platform that centralizes sales, purchasing, inventory, financial documents, and employee management.',
-      'Building AI-powered recruitment tools including CV parsing, automated candidate ranking, and intelligent scoring to accelerate hiring decisions.',
-      'Designing scalable REST APIs, optimizing PostgreSQL queries, and implementing responsive dashboards with Next.js and React.',
-      'Collaborating with senior developers to deliver production-ready features and improve overall system performance and maintainability.',
+      'Full-stack developer building business software and e-commerce platforms with Next.js, TypeScript, PostgreSQL, and WordPress.',
+      '**Hssabati ERP (sole developer)**: Designed and built an ERP covering sales, procurement, inventory, treasury, budgeting, and HR, with 70+ API endpoints and 30+ data models. Features include quote-to-invoice workflows, transactional order confirmation with stock reservation and client credit limits, an executive financial dashboard, role-based access control, PDF document generation, and an AI-assisted recruiting pipeline with CV parsing and candidate scoring.',
+      '**Atlas Marketplace (~109k LOC)**: Worked on a multi-vendor B2B/B2C marketplace, strengthening role-based access control and closing authorization gaps, rebuilding the B2B storefront with wholesale pricing tiers, automating business document PDFs, and developing backend workflows for order processing, fulfillment, and courier dispatch across multiple warehouses.',
+      '**WordPress & WooCommerce Websites**: Built and launched multiple websites and online stores from scratch, extending them with custom PHP/CSS, automating variable product synchronization across product lines, and eliminating catalog sync and media loading bottlenecks.',
     ],
     startDate: 'July 2026',
-    endDate: 'Present',
+    endDate: 'September 2026',
     website: 'https://assors.ma/',
-    technologies: [next, react, node, tailwind, postgresql],
+    technologies: [next, react, typescript, postgresql, tailwind, motion],
   },
 
   {
