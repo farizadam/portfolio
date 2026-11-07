@@ -130,7 +130,7 @@ export const projects: Project[] = [
     highlight: 'Real-time DOM claim verification',
     description: 'Real-Time Browser Extension capturing DOM text for claim verification, backed by an asynchronous Express REST API evaluating claims against external datasets.',
     image: '/project/factcheck.png',
-    link: 'https://github.com/adamfariz/fact_check',
+    link: 'https://github.com/farizadam/fact_check',
     technologies: [
       { name: 'JavaScript', icon: <JavaScript key="javascript" /> },
       { name: 'Node.js', icon: <NodeJs key="node" /> },
