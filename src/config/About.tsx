@@ -25,5 +25,5 @@ export const mySkills: SkillItem[] = [
 export const about = {
   name: 'Adam Fariz',
   description:
-    'Full Stack Developer based in Casablanca and Rabat, Morocco. I build responsive web and mobile products, secure APIs, and AI-powered tools using modern JavaScript technologies.',
+    'Full Stack Developer based in Casablanca, Morocco. I build responsive web and mobile products, secure APIs, and AI-powered tools using modern JavaScript technologies.',
 };
