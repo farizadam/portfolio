@@ -4,21 +4,33 @@ import Mail from '@/components/svgs/Mail';
 
 export const heroConfig = {
   name: 'Adam Fariz',
-  title: 'Full Stack Developer',
+  title: 'Full Stack Software Engineer',
   avatar: '/assets/logo.png',
-  location: 'Casablanca / Rabat, Morocco',
+  location: 'Casablanca, Morocco',
   email: 'adam.fariz@um5r.ac.ma',
-  headline: 'I turn complex product ideas into secure, production-ready web and mobile apps.',
+  headline: 'Engineering robust, scalable web and mobile applications from database schema to polished UI.',
   intro:
-    'From PostgreSQL schemas and REST APIs to polished Next.js and React Native interfaces. Currently building an enterprise ERP and AI-powered recruitment tools at ASSORS.',
+    'State engineering student at FSTM and full-stack developer experienced in building production-grade ERPs, real-time mobile apps, and AI-driven platforms using Next.js, React Native, and Node.js.',
   introFr:
-    'Développeur full stack basé à Casablanca et Rabat. Disponible pour des missions freelance et des postes à temps plein au Maroc et à distance.',
-  availability: 'Open to freelance and full-time roles',
-  now: 'Deepening system design and shipping AI features',
+    'Élève ingénieur en génie logiciel à la FSTM et développeur full-stack. Conception et développement d’applications web et mobiles performantes. Disponible pour des opportunités professionnelles et missions freelance.',
+  availability: 'Open to freelance projects & full-time roles',
+  now: 'Mastering advanced system design & building high-performance web systems',
 };
 
 export const socialLinks = [
-  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/adam-fariz-3bba3b2a9', icon: <LinkedIn /> },
-  { name: 'GitHub', href: 'https://github.com/adamfariz', icon: <Github /> },
-  { name: 'Email', href: 'mailto:adam.fariz@um5r.ac.ma', icon: <Mail /> },
+  { 
+    name: 'LinkedIn', 
+    href: 'https://www.linkedin.com/in/adam-fariz-3bba3b2a9', 
+    icon: <LinkedIn /> 
+  },
+  { 
+    name: 'GitHub', 
+    href: 'https://github.com/farizadam', 
+    icon: <Github /> 
+  },
+  { 
+    name: 'Email', 
+    href: 'mailto:adam.fariz@um5r.ac.ma', 
+    icon: <Mail /> 
+  },
 ];
