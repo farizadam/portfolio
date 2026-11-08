@@ -17,7 +17,7 @@ export const siteConfig = {
   title: `${heroConfig.name} | Full Stack Developer in Morocco`,
   description:
     'Adam Fariz is a full stack developer based in Casablanca and Rabat, Morocco, building secure web and mobile apps, REST APIs, and AI-powered tools with Next.js, React Native, Node.js, and PostgreSQL.',
-  url: (process.env.NEXT_PUBLIC_URL || 'https://farizadam.vercel.app').replace(/\/$/, ''),
+  url: (process.env.NEXT_PUBLIC_URL || 'https://fariz.app').replace(/\/$/, ''),
   ogImage: '/meta/opengraph-image.png',
   locale: 'en_US',
   author: {

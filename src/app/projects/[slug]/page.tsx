@@ -45,14 +45,19 @@ export async function generateMetadata({
   }
 
   const { title, description, image } = caseStudy.frontmatter;
+  const pageTitle = `${title} - Project Case Study`;
+  const url = `${siteConfig.url}/projects/${slug}`;
 
   return {
     metadataBase: new URL(siteConfig.url),
-    title: `${title} - Project Case Study`,
+    title: pageTitle,
     description,
+    authors: [{ name: siteConfig.author.name, url: siteConfig.url }],
+    alternates: { canonical: url },
     openGraph: {
-      title: `${title} - Project Case Study`,
+      title: pageTitle,
       description,
+      url,
       images: [image],
       type: 'article',
     },

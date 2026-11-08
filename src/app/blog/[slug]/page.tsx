@@ -44,17 +44,23 @@ export async function generateMetadata({
     };
   }
 
-  const { title, description, image } = post.frontmatter;
+  const { title, description, image, date } = post.frontmatter;
+  const url = `${siteConfig.url}/blog/${slug}`;
 
   return {
     metadataBase: new URL(siteConfig.url),
     title,
     description,
+    authors: [{ name: siteConfig.author.name, url: siteConfig.url }],
+    alternates: { canonical: url },
     openGraph: {
       title,
       description,
+      url,
       images: [image],
       type: 'article',
+      publishedTime: new Date(date).toISOString(),
+      authors: [siteConfig.author.name],
     },
     twitter: {
       card: 'summary_large_image',
